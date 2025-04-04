@@ -6,10 +6,10 @@ df = pd.read_csv("mobile_data.csv")
 
 # Parsing functions
 def parse_price(price):
-    if isinstance(price, str) and price.lower() != 'not available':
+    if isinstance(price, str) and price.lower() != 'Not available':
         numeric = re.sub(r'[^\d]', '', price) # Remove all values that arent numbers
         return float(numeric) if numeric else None # We have some instances of "Not available"
-    return None
+    return None # If the price is not available
 
 def parse_battery(battery):
     if isinstance(battery, str):
