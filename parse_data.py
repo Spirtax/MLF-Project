@@ -26,7 +26,6 @@ def strip_units(val):
 
 
 
-
 # Create columns
 df['Battery Capacity'] = df['Battery Capacity'].apply(parse_battery)
 df['RAM'] = df['RAM'].apply(strip_units)
