@@ -1,0 +1,21 @@
+{
+    "Apple": 0,
+    "Google": 1,
+    "Honor": 2,
+    "Huawei": 3,
+    "Infinix": 4,
+    "Lenovo": 5,
+    "Motorola": 6,
+    "Nokia": 7,
+    "OnePlus": 8,
+    "Oppo": 9,
+    "POCO": 10,
+    "Poco": 11,
+    "Realme": 12,
+    "Samsung": 13,
+    "Sony": 14,
+    "Tecno": 15,
+    "Vivo": 16,
+    "Xiaomi": 17,
+    "iQOO": 18
+}
