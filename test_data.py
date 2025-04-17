@@ -3,6 +3,7 @@ from sklearn.tree import DecisionTreeRegressor
 import random
 from math import ceil
 from statistics import mean
+from knn import KNNModel
 
 # Finds the MSE. Lower values mean indicate better performance, meaning 
 # the model predicts closer to the actual price
@@ -27,7 +28,7 @@ def r2_score(y_true, y_pred):
     r2 = 1 - (residual_sum_of_squares / total_sum_of_squares)
     return r2
 
-def kfold_validation(n_folds=5):
+def kfold_validation(n_folds=5, model_function = None):
     df = parse_data.df # Get all the data
     
     # Features we are using to predict
@@ -41,16 +42,18 @@ def kfold_validation(n_folds=5):
     # y = df[['Launched Price (USA)', 'Launched Price (Dubai)', 'Launched Price (China)',
     #         'Launched Price (India)', 'Launched Price (Pakistan)']].values.tolist()
 
-    # Shuffle data
+    # Mix around data before we seperate it into chunks
     data = list(zip(X, y))
     random.seed(42)
     random.shuffle(data)
 
+    # Divide into chunks
     fold_size = ceil(len(data) / n_folds)
     models = []
     mse_scores = []
     r2_scores = []
 
+    # For each chunk train the model and validate on R2 and MSE
     for i in range(n_folds):
         val_data = data[i * fold_size : (i + 1) * fold_size]
         train_data = data[:i * fold_size] + data[(i + 1) * fold_size:]
@@ -58,9 +61,15 @@ def kfold_validation(n_folds=5):
         X_train, y_train = zip(*train_data)
         X_val, y_val = zip(*val_data)
 
-        # Train the model here
-        model = DecisionTreeRegressor()
-        model.fit(X_train, y_train)
+        # First instantiate the model
+        if model_function is None: 
+            print("No model found, using scikit-learn Decision Tree Regressor instead")
+            model = DecisionTreeRegressor()
+        else: 
+            model = model_function()
+            print(f"Using model with name: {model.__class__.__name__}")
+        model = model_function()
+        model.fit(X_train, y_train) 
         models.append(model)
         y_pred = model.predict(X_val)
 
@@ -75,15 +84,26 @@ def kfold_validation(n_folds=5):
         print(f"R-squared {i+1} Model: R2 = {r2:.2f}\n")
 
     print("\nResults:")
-    print(f"Best MSE score: Model {mse_scores.index(min(mse_scores))}")
-    print(f"Best R2 score: Model {r2_scores.index(max(r2_scores))}\n")
+    print(f"Best MSE score: Model {mse_scores.index(min(mse_scores))+1}")
+    print(f"Best R2 score: Model {r2_scores.index(max(r2_scores))+1}\n")
 
     return models, mse_scores
 
 
-example = [[8, 433, 185.0, 12.0, 16.0, 50.0, 143, 5000.0, 6.7, 2023]]  # Example: OnePlus 11 256GB
-models, mse_scores = kfold_validation()
 
+
+
+
+# ==============================================
+# ============== Testing the data ==============
+# ==============================================
+
+models, mse_scores = kfold_validation(model_function=lambda: KNNModel(k=5))
+
+# In order: Company Name, Model Name, Mobile Weight, RAM, Front Camera, 
+# Back Camera, Processor, Battery Capacity, Screen Size, Launched Year
+# Example: OnePlus 11 256GB, $700 on website, $900 on Amazon
+example = [[8, 433, 185.0, 12.0, 16.0, 50.0, 143, 5000.0, 6.7, 2023]]  
 for i, model in enumerate(models):
     prediction = model.predict(example)[0]
     print(f"Model {i+1} prediction")
