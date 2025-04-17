@@ -4,6 +4,7 @@ import random
 from math import ceil
 from statistics import mean
 from knn import KNNModel
+import matplotlib.pyplot as plt
 
 # Finds the MSE. Lower values mean indicate better performance, meaning 
 # the model predicts closer to the actual price
@@ -28,6 +29,8 @@ def r2_score(y_true, y_pred):
     r2 = 1 - (residual_sum_of_squares / total_sum_of_squares)
     return r2
 
+# Runs k-fold validation, default number of chunsks is 5. Expects to be passed a model function
+# that follows the format as model_interface.py
 def kfold_validation(n_folds=5, model_function = None):
     df = parse_data.df # Get all the data
     
@@ -87,10 +90,48 @@ def kfold_validation(n_folds=5, model_function = None):
     print(f"Best MSE score: Model {mse_scores.index(min(mse_scores))+1}")
     print(f"Best R2 score: Model {r2_scores.index(max(r2_scores))+1}\n")
 
-    return models, mse_scores
+    return models, mse_scores, r2_scores
 
+# Runs tests for knn. Will plot points for the average MSE and R2 over 5 models using k-fold validation
+def test_knn(upper_limit=15):
+    mse_scores_per_k = []
+    r2_scores_per_k = []
 
+    for k in range(1, upper_limit+1, 2):
+        print(f"Training with k={k}")
+        models, mse_scores, r2_scores = kfold_validation(model_function=lambda: KNNModel(k=k))
 
+        # Calculate average MSE and R² for the current k
+        avg_mse = mean(mse_scores)
+        mse_scores_per_k.append(avg_mse)
+        r2_avg = mean(r2_scores)
+        r2_scores_per_k.append(r2_avg)
+
+        print(f"Average MSE for k={k}: {avg_mse}")
+        print(f"Average R² for k={k}: {r2_avg}\n")
+
+    k_values = list(range(1, upper_limit+1, 2))
+
+    plt.figure(figsize=(12, 6))
+
+    # Plot MSE
+    plt.subplot(1, 2, 1)
+    plt.plot(k_values, mse_scores_per_k, marker='o', label='MSE', color='blue')
+    plt.xlabel('k value')
+    plt.ylabel('MSE')
+    plt.title('MSE vs k value')
+    plt.grid(True)
+
+    # Plot R2
+    plt.subplot(1, 2, 2)
+    plt.plot(k_values, r2_scores_per_k, marker='o', label='R²', color='red')
+    plt.xlabel('k value')
+    plt.ylabel('R2')
+    plt.title('R2 vs k value')
+
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig('data/knn/knn_plot.png') 
 
 
 
@@ -98,17 +139,4 @@ def kfold_validation(n_folds=5, model_function = None):
 # ============== Testing the data ==============
 # ==============================================
 
-models, mse_scores = kfold_validation(model_function=lambda: KNNModel(k=5))
-
-# In order: Company Name, Model Name, Mobile Weight, RAM, Front Camera, 
-# Back Camera, Processor, Battery Capacity, Screen Size, Launched Year
-# Example: OnePlus 11 256GB, $700 on website, $900 on Amazon
-example = [[8, 433, 185.0, 12.0, 16.0, 50.0, 143, 5000.0, 6.7, 2023]]  
-for i, model in enumerate(models):
-    prediction = model.predict(example)[0]
-    print(f"Model {i+1} prediction")
-    print("Predicted USA price: USD", prediction)
-    # print("Predicted Dubai price: AED", pred_dubai)
-    # print("Predicted China price: CNY", pred_china)
-    # print("Predicted India price: INR", pred_india)
-    # print("Predicted Pakistan price: PKR", pred_pakistan)
+test_knn(upper_limit=15)
