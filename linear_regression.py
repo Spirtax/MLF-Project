@@ -1,6 +1,6 @@
 import parse_data
 import math
-
+import matplotlib.pyplot as plt
 
 
 df = parse_data.df 
@@ -24,38 +24,56 @@ min_change_parameter = 1
 y_int = 1
 
 
-for m in range(n):
-    y_int = y_int +5
-    print(y_int)
-    change_parameter = 1
-    for i in range(100): 
-        change_parameter = change_parameter / 2
-        weights = [0] * len(data[0][0])
-        for k in range(10):
-            error_total = 0
-            for i in range(len(data)):
-                x_vals = data[i][0][:]
-                y_val = data[i][1][0]
-                x_vals[len(x_vals)-1] = y_int
-                prediction = 0
-                for j in range(len(x_vals)):
-                    prediction += weights[j] * x_vals[j] 
-                error = y_val - prediction
-                for j in range(len(weights)):
-                    weights[j] = weights[j] + (error * change_parameter * x_vals[j])
-                error_total += abs(error / y_val)
-            if abs(error_total) < abs(min_error):
-                min_error = abs(error_total)
-                min_n = y_int
-                min_weights = []
-                for p in range(len(weights)):
-                    min_weights.append(weights[p])
-                min_change_parameter = change_parameter
+learning_parameters = []
+errors = []
 
-    if m == n-1:
-        print(f'optimal weights are {min_weights}')
-        print(f'optimal y int is {min_n}')
-        print(f'min_error is {min_error}')
-        print(f'optimal learning paramter is {min_change_parameter}')
+change_parameter = .00001
+for i in range(100): 
+    # tweak learning parameter to find optimal one
+    change_parameter = change_parameter / 2
+    weights = [0] * len(data[0][0])
+    for m in range(100):
+    # create weights array
+        error_total = 0
+        for i in range(len(data)):
+            # get the x and y vals for this data point
+            x_vals = data[i][0][:]
+            y_val = data[i][1][0]
+            # get predicted value
+            prediction = 0
+            for j in range(len(x_vals)):
+                prediction += weights[j] * x_vals[j] 
+                # calculate error
+            error = y_val - prediction
+            # update weights based on error
+            for j in range(len(weights)):
+                weights[j] = weights[j] + (error * change_parameter * x_vals[j])
+                # add error to total
+            error_total += abs(error / y_val)
+        # if minimum error store results
+        if abs(error_total) < abs(min_error):
+            min_error = abs(error_total)
+            min_n = y_int
+            min_weights = []
+            for p in range(len(weights)):
+                min_weights.append(weights[p])
+            min_change_parameter = change_parameter
+        if m == 99 and not math.isnan(error_total) and error_total < 10000 :
+            errors.append(error_total)
+            learning_parameters.append(change_parameter)
 
-    
+print(f'optimal weights are {min_weights}')
+print(f'optimal y int is {min_n}')
+print(f'min_error is {min_error}')
+print(f'optimal learning paramter is {min_change_parameter}')
+
+print(learning_parameters)
+print(errors)
+
+plt.figure(figsize=(10, 6))
+plt.plot(learning_parameters, errors, marker='o')
+plt.xscale('log')
+plt.xlabel('Learning Rate (in log scale)')
+plt.ylabel('Total Error')
+plt.title('Learning Rate vs Total Error')
+plt.show()
