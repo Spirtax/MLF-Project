@@ -59,7 +59,7 @@ for i in range(100):
                 min_weights.append(weights[p])
             min_change_parameter = change_parameter
         if m == 99 and not math.isnan(error_total) and error_total < 10000 :
-            errors.append(error_total)
+            errors.append(error_total * 100)
             learning_parameters.append(change_parameter)
 
 print(f'optimal weights are {min_weights}')
@@ -70,10 +70,11 @@ print(f'optimal learning paramter is {min_change_parameter}')
 print(learning_parameters)
 print(errors)
 
-plt.figure(figsize=(10, 6))
-plt.plot(learning_parameters, errors, marker='o')
+
+plt.plot(learning_parameters, errors, marker='o', label='Total Error')
 plt.xscale('log')
-plt.xlabel('Learning Rate (in log scale)')
-plt.ylabel('Total Error')
+plt.xlabel('Learning Rate (in log scale between 0 and 1)')
+plt.ylabel('Total Error in % (Using cumulative percent error)')
 plt.title('Learning Rate vs Total Error')
+plt.legend()
 plt.show()
