@@ -3,7 +3,7 @@ import pandas as pd
 import re
 import json
 
-df = pd.read_csv("mobile_data.csv")
+df = pd.read_csv("data/mobile_data.csv")
 
 # Parsing functions
 def parse_price(price):
@@ -55,5 +55,5 @@ for col in ['Company Name', 'Processor', 'Model Name']:
     # Replace the column with encoded integers
     df[col] = df[col].map(val_to_int)
     
-    with open(f'encodings/{col}_encodings.json', 'w') as f: # Save to JSON file
+    with open(f'data/encodings/{col}_encodings.json', 'w') as f: # Save to JSON file
         json.dump(val_to_int, f, indent=4)

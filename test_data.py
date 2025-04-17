@@ -3,7 +3,7 @@ from sklearn.tree import DecisionTreeRegressor
 import random
 from math import ceil
 from statistics import mean
-from knn import KNNModel
+from models.knn import KNNModel
 import matplotlib.pyplot as plt
 
 # Finds the MSE. Lower values mean indicate better performance, meaning 

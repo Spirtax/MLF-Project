@@ -1,6 +1,6 @@
 import numpy as np
 from collections import Counter
-from model_interface import ModelInterface
+from models.model_interface import ModelInterface
 
 # euclidean distance function
 def euclidean_distance(p1, p2):
