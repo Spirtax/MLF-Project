@@ -1,7 +1,9 @@
-import parse_data
+import os
+import sys
 import math
 import matplotlib.pyplot as plt
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import parse_data
 
 df = parse_data.df 
     
