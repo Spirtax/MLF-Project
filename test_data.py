@@ -4,6 +4,7 @@ import random
 from math import ceil
 from statistics import mean
 from models.knn import KNNModel
+from models.decision_tree import DecisionTreeModel
 import matplotlib.pyplot as plt
 
 # Finds the MSE. Lower values mean indicate better performance, meaning 
@@ -29,9 +30,9 @@ def r2_score(y_true, y_pred):
     r2 = 1 - (residual_sum_of_squares / total_sum_of_squares)
     return r2
 
-# Runs k-fold validation, default number of chunsks is 5. Expects to be passed a model function
+# Runs k-fold validation, default number of chunks is 5. Expects to be passed a model function
 # that follows the format as model_interface.py
-def kfold_validation(n_folds=5, model_function = None):
+def kfold_validation(n_folds=5, model_function = None, _seed=42):
     df = parse_data.df # Get all the data
     
     # Features we are using to predict
@@ -47,7 +48,7 @@ def kfold_validation(n_folds=5, model_function = None):
 
     # Mix around data before we seperate it into chunks
     data = list(zip(X, y))
-    random.seed(42)
+    random.seed(_seed)
     random.shuffle(data)
 
     # Divide into chunks
@@ -58,11 +59,11 @@ def kfold_validation(n_folds=5, model_function = None):
 
     # For each chunk train the model and validate on R2 and MSE
     for i in range(n_folds):
-        val_data = data[i * fold_size : (i + 1) * fold_size]
-        train_data = data[:i * fold_size] + data[(i + 1) * fold_size:]
+        val_data = data[i * fold_size : (i + 1) * fold_size] # 20% to test on
+        train_data = data[:i * fold_size] + data[(i + 1) * fold_size:] # 80% to train on
 
-        X_train, y_train = zip(*train_data)
-        X_val, y_val = zip(*val_data)
+        X_train, y_train = zip(*train_data) # x and y training variables
+        X_val, y_val = zip(*val_data) # x and y validation variables
 
         # First instantiate the model
         if model_function is None: 
@@ -71,10 +72,9 @@ def kfold_validation(n_folds=5, model_function = None):
         else: 
             model = model_function()
             print(f"Using model with name: {model.__class__.__name__}")
-        model = model_function()
-        model.fit(X_train, y_train) 
-        models.append(model)
-        y_pred = model.predict(X_val)
+        model.fit(X_train, y_train) # Train the model
+        models.append(model) # Add model to list of models
+        y_pred = model.predict(X_val) # Predict values so we can estimate errors
 
         # Calculate MSE
         mse = mean_squared_error(y_val, y_pred)
@@ -101,14 +101,14 @@ def test_knn(upper_limit=15):
         print(f"Training with k={k}")
         models, mse_scores, r2_scores = kfold_validation(model_function=lambda: KNNModel(k=k))
 
-        # Calculate average MSE and R² for the current k
+        # Calculate average MSE and R2 for the current k
         avg_mse = mean(mse_scores)
         mse_scores_per_k.append(avg_mse)
         r2_avg = mean(r2_scores)
         r2_scores_per_k.append(r2_avg)
 
         print(f"Average MSE for k={k}: {avg_mse}")
-        print(f"Average R² for k={k}: {r2_avg}\n")
+        print(f"Average R2 for k={k}: {r2_avg}\n")
 
     k_values = list(range(1, upper_limit+1, 2))
 
@@ -133,10 +133,50 @@ def test_knn(upper_limit=15):
     plt.tight_layout()
     plt.savefig('data/knn/knn_plot.png') 
 
+# Runs tests for decision trees. Will plot points for the average MSE and R2 over 5 models using k-fold validation
+def test_decision_tree(max_depth_limit=15):
+    mse_scores_per_depth = []
+    r2_scores_per_depth = []
 
+    for depth in range(1, max_depth_limit + 1):
+        print(f"Training Decision Tree with max_depth={depth}")
+        models, mse_scores, r2_scores = kfold_validation(_seed=random.randint(-1000000,1000000))
+
+        avg_mse = mean(mse_scores)
+        mse_scores_per_depth.append(avg_mse)
+
+        avg_r2 = mean(r2_scores)
+        r2_scores_per_depth.append(avg_r2)
+
+        print(f"Average MSE for depth={depth}: {avg_mse}")
+        print(f"Average R2 for depth={depth}: {avg_r2}\n")
+
+    depths = list(range(1, max_depth_limit + 1))
+
+    plt.figure(figsize=(12, 6))
+
+    # Plot MSE
+    plt.subplot(1, 2, 1)
+    plt.plot(depths, mse_scores_per_depth, marker='o', label='MSE', color='blue')
+    plt.xlabel('Max Depth')
+    plt.ylabel('MSE')
+    plt.title('MSE vs Max Depth')
+    plt.grid(True)
+
+    # Plot R2
+    plt.subplot(1, 2, 2)
+    plt.plot(depths, r2_scores_per_depth, marker='o', label='R2', color='red')
+    plt.xlabel('Iteration')
+    plt.ylabel('R2')
+    plt.title('R2 over iterations')
+
+    plt.tight_layout()
+    plt.grid(True)
+    plt.savefig('data/decision_tree/decision_tree_plot.png')
 
 # ==============================================
 # ============== Testing the data ==============
 # ==============================================
 
-test_knn(upper_limit=15)
+# test_knn(upper_limit=15)
+test_decision_tree(max_depth_limit=3)

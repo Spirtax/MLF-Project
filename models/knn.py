@@ -20,6 +20,7 @@ class KNNModel(ModelInterface):
             distances = [(euclidean_distance(point, query), label[0]) for point, label in self.data]
             distances.sort()
             k_nearest_labels = [label for _, label in distances[:self.k]]
-            highest = Counter(k_nearest_labels).most_common(1)[0][0]
+            highest = Counter(k_nearest_labels).most_common(1)[0][0] # take the value from the k nearest points
             predictions.append(highest)
         return predictions
+        
