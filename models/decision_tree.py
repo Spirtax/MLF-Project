@@ -93,7 +93,7 @@ def find_best_split(X, y):
         thresholds = sorted(set(feature_values)) 
         for threshold in thresholds:
             # Calling variance_reduction here instead of information_gain (entropy)
-            score = information_gain(X, y, feature, threshold)
+            score = variance_reduction(X, y, feature, threshold) # You can swap out variance_reduction for information_gain to test the entropy code (It sucks)
             if score > best_score:
                 best_score = score
                 best_feature = feature
