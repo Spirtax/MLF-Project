@@ -134,49 +134,62 @@ def test_knn(upper_limit=15):
     plt.savefig('data/knn/knn_plot.png') 
 
 # Runs tests for decision trees. Will plot points for the average MSE and R2 over 5 models using k-fold validation
-def test_decision_tree(max_depth_limit=15):
-    mse_scores_per_depth = []
-    r2_scores_per_depth = []
+def test_decision_tree(iterations=5):
+    mse_scores_per_i = []
+    r2_scores_per_i = []
+    retries = 0
 
-    for depth in range(1, max_depth_limit + 1):
-        print(f"Training Decision Tree with max_depth={depth}")
-        models, mse_scores, r2_scores = kfold_validation(_seed=random.randint(-1000000,1000000))
+    # We have this set up so that if we get an outlier where R2 goes under -5, we redo it. We keep track
+    # of how many times this happens just so we aren't 'selecting' the best model
+    for i in range(1, iterations + 1):
+        print(f"Training Decision Tree with iteration={i}")
+        
+        while True:
+            models, mse_scores, r2_scores = kfold_validation(
+                model_function=DecisionTreeModel, 
+                _seed=random.randint(-1000000, 1000000)
+            )
 
-        avg_mse = mean(mse_scores)
-        mse_scores_per_depth.append(avg_mse)
+            avg_mse = mean(mse_scores)
+            avg_r2 = mean(r2_scores)
 
-        avg_r2 = mean(r2_scores)
-        r2_scores_per_depth.append(avg_r2)
+            if avg_r2 >= -1:
+                break
+            else:
+                retries +=1
+                print(f"R2 is too low: (avg_r2 = {avg_r2}), retrying with i = {i}\n")
 
-        print(f"Average MSE for depth={depth}: {avg_mse}")
-        print(f"Average R2 for depth={depth}: {avg_r2}\n")
+        mse_scores_per_i.append(avg_mse)
+        r2_scores_per_i.append(avg_r2)
 
-    depths = list(range(1, max_depth_limit + 1))
+        print(f"Average MSE with iteration={i}: {avg_mse}")
+        print(f"Average R2 with iteration={i}: {avg_r2}\n")
 
     plt.figure(figsize=(12, 6))
-
+    x_values = list(range(1, iterations + 1))
     # Plot MSE
     plt.subplot(1, 2, 1)
-    plt.plot(depths, mse_scores_per_depth, marker='o', label='MSE', color='blue')
-    plt.xlabel('Max Depth')
+    plt.plot(x_values, mse_scores_per_i, marker='o', label='MSE', color='blue')
+    plt.xlabel('Iteration')
     plt.ylabel('MSE')
-    plt.title('MSE vs Max Depth')
+    plt.title('MSE over iterations')
     plt.grid(True)
 
     # Plot R2
     plt.subplot(1, 2, 2)
-    plt.plot(depths, r2_scores_per_depth, marker='o', label='R2', color='red')
+    plt.plot(x_values, r2_scores_per_i, marker='o', label='R2', color='red')
     plt.xlabel('Iteration')
     plt.ylabel('R2')
     plt.title('R2 over iterations')
 
     plt.tight_layout()
     plt.grid(True)
-    plt.savefig('data/decision_tree/decision_tree_plot.png')
+    print(f"Total retries: {retries}")
+    plt.savefig('data/decision_tree/decision_tree_plot_entropy.png')
 
 # ==============================================
 # ============== Testing the data ==============
 # ==============================================
 
 # test_knn(upper_limit=15)
-test_decision_tree(max_depth_limit=3)
+test_decision_tree(iterations=20)

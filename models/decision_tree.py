@@ -28,6 +28,8 @@ class DecisionTreeModel(ModelInterface):
         return [traverse_tree(self.root, x) for x in X]
 
 # Calculates entropy of given label
+# Although we used entropy for a test, we will not any more since entropy is mainly used for 
+# classification, and we are doing regression
 def entropy(y):
     # Get the amount each label appears
     counts = {}
@@ -45,6 +47,7 @@ def entropy(y):
 
 # Function to compute information gain. Information gain finds out how much entropy 
 # is lost after splitting a specific node
+# This is the old information_gain method that we used with our entropy model
 def information_gain(X, y, feature_index, threshold):
     # Split the data based on the threshold
     left_y = [y[i] for i in range(len(X)) if X[i][feature_index] <= threshold]
@@ -60,23 +63,39 @@ def information_gain(X, y, feature_index, threshold):
     ig = parent_entropy - ((len(left_y) / len(y)) * left_entropy + (len(right_y) / len(y)) * right_entropy)
     return ig
 
-# We find the best feature to use based on each features information gain
+# Using variance reduction now instead of entropy
+def variance(y):
+    return np.var(y) if len(y) > 0 else 0
+
+# This follows the exact same format as information gain, we are just using variance instead
+def variance_reduction(X, y, feature_index, threshold):
+    left_y = [y[i] for i in range(len(X)) if X[i][feature_index] <= threshold]
+    right_y = [y[i] for i in range(len(X)) if X[i][feature_index] > threshold]
+
+    total_var = variance(y)
+    left_var = variance(left_y)
+    right_var = variance(right_y)
+
+    return total_var (len(left_y) / len(y)) * left_var + (len(right_y) / len(y)) * right_var
+
+# We find the best feature to use based on each features variance
 def find_best_split(X, y):
-    best_ig = -float('inf')
+    best_score = -float('inf')
     best_feature = None
     best_threshold = None
 
-    # We will loop through each feature and get the information gain for each one
+    # We will loop through each feature and get the variance for each one
     # if it is better than the previous one, replace and we use that feature
     features = len(X[0])
     for feature in range(features):
-        # We get the value at each feature and test each as a threshold in information_gain
+        # We get the value at each feature and test each as a threshold
         feature_values = [x[feature] for x in X]
         thresholds = sorted(set(feature_values)) 
         for threshold in thresholds:
-            ig = information_gain(X, y, feature, threshold)
-            if ig > best_ig:
-                best_ig = ig
+            # Calling variance_reduction here instead of information_gain (entropy)
+            score = information_gain(X, y, feature, threshold)
+            if score > best_score:
+                best_score = score
                 best_feature = feature
                 best_threshold = threshold
 

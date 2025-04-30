@@ -1,0 +1,635 @@
+Training Decision Tree with iteration=1
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 28900890.66
+R-squared 1 Model: R2 = 0.53
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 274639.61
+R-squared 2 Model: R2 = 0.99
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 42262402.12
+R-squared 3 Model: R2 = -0.28
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 17977309.98
+R-squared 4 Model: R2 = -0.88
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 37964619.36
+R-squared 5 Model: R2 = -12.51
+
+
+Results:
+Best MSE score: Model 2
+Best R2 score: Model 2
+
+R2 is too low: (avg_r2 = -2.4280878985771124), retrying with i = 1
+
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 135752.61
+R-squared 1 Model: R2 = 0.99
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 10500467.61
+R-squared 2 Model: R2 = -0.02
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 12121821.92
+R-squared 3 Model: R2 = 0.76
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 37058693.85
+R-squared 4 Model: R2 = 0.11
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 106193.17
+R-squared 5 Model: R2 = 0.98
+
+
+Results:
+Best MSE score: Model 5
+Best R2 score: Model 1
+
+Average MSE with iteration=1: 11984585.834408602
+Average R2 with iteration=1: 0.5650800754439345
+
+Training Decision Tree with iteration=2
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 11661603.49
+R-squared 1 Model: R2 = 0.34
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 5002278.55
+R-squared 2 Model: R2 = 0.74
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 56841416.68
+R-squared 3 Model: R2 = -0.32
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 24413703.64
+R-squared 4 Model: R2 = -1.28
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 14413967.86
+R-squared 5 Model: R2 = 0.65
+
+
+Results:
+Best MSE score: Model 2
+Best R2 score: Model 2
+
+Average MSE with iteration=2: 22466594.04408602
+Average R2 with iteration=2: 0.025492964200065284
+
+Training Decision Tree with iteration=3
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 31198145.97
+R-squared 1 Model: R2 = -1.05
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 7825028.75
+R-squared 2 Model: R2 = 0.69
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 9442990.51
+R-squared 3 Model: R2 = 0.68
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 41047102.36
+R-squared 4 Model: R2 = 0.07
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 13443604.06
+R-squared 5 Model: R2 = 0.21
+
+
+Results:
+Best MSE score: Model 2
+Best R2 score: Model 2
+
+Average MSE with iteration=3: 20591374.32795699
+Average R2 with iteration=3: 0.12198288719031165
+
+Training Decision Tree with iteration=4
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 48812713.68
+R-squared 1 Model: R2 = -0.87
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 19201845.48
+R-squared 2 Model: R2 = 0.60
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 29868611.88
+R-squared 3 Model: R2 = 0.19
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 12841269.61
+R-squared 4 Model: R2 = -0.34
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 11089315.76
+R-squared 5 Model: R2 = -0.03
+
+
+Results:
+Best MSE score: Model 5
+Best R2 score: Model 2
+
+Average MSE with iteration=4: 24362751.28172043
+Average R2 with iteration=4: -0.09051483275748211
+
+Training Decision Tree with iteration=5
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 112830040.98
+R-squared 1 Model: R2 = -7.48
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 41319022.91
+R-squared 2 Model: R2 = -0.25
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 35868542.44
+R-squared 3 Model: R2 = -2.95
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 49201709.66
+R-squared 4 Model: R2 = -0.08
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 8818784.90
+R-squared 5 Model: R2 = 0.71
+
+
+Results:
+Best MSE score: Model 5
+Best R2 score: Model 5
+
+R2 is too low: (avg_r2 = -2.012342898741781), retrying with i = 5
+
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 8868768.48
+R-squared 1 Model: R2 = 0.83
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 5471659.84
+R-squared 2 Model: R2 = 0.59
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 32797148.25
+R-squared 3 Model: R2 = -0.96
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 4254361.35
+R-squared 4 Model: R2 = 0.79
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 8322949.87
+R-squared 5 Model: R2 = 0.72
+
+
+Results:
+Best MSE score: Model 4
+Best R2 score: Model 1
+
+Average MSE with iteration=5: 11942977.558064517
+Average R2 with iteration=5: 0.3934849669774605
+
+Training Decision Tree with iteration=6
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 6082793.83
+R-squared 1 Model: R2 = 0.81
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 24908310.81
+R-squared 2 Model: R2 = -3.17
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 7587786.11
+R-squared 3 Model: R2 = 0.86
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 32632913.79
+R-squared 4 Model: R2 = -1.38
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 47847467.42
+R-squared 5 Model: R2 = -0.73
+
+
+Results:
+Best MSE score: Model 1
+Best R2 score: Model 3
+
+Average MSE with iteration=6: 23811854.393548388
+Average R2 with iteration=6: -0.7259330739173313
+
+Training Decision Tree with iteration=7
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 16659385.01
+R-squared 1 Model: R2 = 0.10
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 50639297.16
+R-squared 2 Model: R2 = -0.08
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 73356.06
+R-squared 3 Model: R2 = 0.99
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 19232489.80
+R-squared 4 Model: R2 = 0.28
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 13630053.31
+R-squared 5 Model: R2 = 0.59
+
+
+Results:
+Best MSE score: Model 3
+Best R2 score: Model 3
+
+Average MSE with iteration=7: 20046916.265591398
+Average R2 with iteration=7: 0.37613827320111204
+
+Training Decision Tree with iteration=8
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 2802035.87
+R-squared 1 Model: R2 = 0.53
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 22103197.48
+R-squared 2 Model: R2 = 0.56
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 48274628.46
+R-squared 3 Model: R2 = -0.57
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 1379599.94
+R-squared 4 Model: R2 = 0.95
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 19164145.66
+R-squared 5 Model: R2 = -0.40
+
+
+Results:
+Best MSE score: Model 4
+Best R2 score: Model 4
+
+Average MSE with iteration=8: 18744721.4827957
+Average R2 with iteration=8: 0.21579029130491834
+
+Training Decision Tree with iteration=9
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 27865841.64
+R-squared 1 Model: R2 = -0.56
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 30966271.68
+R-squared 2 Model: R2 = 0.13
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 1334610.17
+R-squared 3 Model: R2 = 0.94
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 8548591.48
+R-squared 4 Model: R2 = 0.83
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 21137924.76
+R-squared 5 Model: R2 = -3.15
+
+
+Results:
+Best MSE score: Model 3
+Best R2 score: Model 3
+
+Average MSE with iteration=9: 17970647.94731183
+Average R2 with iteration=9: -0.3619092368085233
+
+Training Decision Tree with iteration=10
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 31794519.76
+R-squared 1 Model: R2 = -0.28
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 8447366.72
+R-squared 2 Model: R2 = 0.56
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 34246187.73
+R-squared 3 Model: R2 = -0.36
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 3489934.78
+R-squared 4 Model: R2 = 0.91
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 18265596.12
+R-squared 5 Model: R2 = 0.22
+
+
+Results:
+Best MSE score: Model 4
+Best R2 score: Model 4
+
+Average MSE with iteration=10: 19248721.022580646
+Average R2 with iteration=10: 0.2108294701960378
+
+Training Decision Tree with iteration=11
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 9777110.77
+R-squared 1 Model: R2 = 0.78
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 52816150.80
+R-squared 2 Model: R2 = 0.01
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 17267969.84
+R-squared 3 Model: R2 = 0.11
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 12551905.89
+R-squared 4 Model: R2 = -0.20
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 6222254.24
+R-squared 5 Model: R2 = -1.84
+
+
+Results:
+Best MSE score: Model 5
+Best R2 score: Model 1
+
+Average MSE with iteration=11: 19727078.30860215
+Average R2 with iteration=11: -0.22779660720376413
+
+Training Decision Tree with iteration=12
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 1428396.32
+R-squared 1 Model: R2 = 0.96
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 1329231.15
+R-squared 2 Model: R2 = 0.96
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 9764489.43
+R-squared 3 Model: R2 = 0.65
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 6147363.32
+R-squared 4 Model: R2 = 0.60
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 33609613.34
+R-squared 5 Model: R2 = -0.74
+
+
+Results:
+Best MSE score: Model 2
+Best R2 score: Model 2
+
+Average MSE with iteration=12: 10455818.713978494
+Average R2 with iteration=12: 0.48676510836603276
+
+Training Decision Tree with iteration=13
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 41361868.82
+R-squared 1 Model: R2 = -1.20
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 1422999.14
+R-squared 2 Model: R2 = 0.97
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 7559253.08
+R-squared 3 Model: R2 = 0.52
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 31017432.96
+R-squared 4 Model: R2 = 0.09
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 1350813.20
+R-squared 5 Model: R2 = 0.94
+
+
+Results:
+Best MSE score: Model 5
+Best R2 score: Model 2
+
+Average MSE with iteration=13: 16542473.440860216
+Average R2 with iteration=13: 0.2636793694815379
+
+Training Decision Tree with iteration=14
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 63364014.43
+R-squared 1 Model: R2 = -0.26
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 12735534.81
+R-squared 2 Model: R2 = 0.53
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 3359323.03
+R-squared 3 Model: R2 = -0.01
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 15965321.83
+R-squared 4 Model: R2 = 0.07
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 1359727.42
+R-squared 5 Model: R2 = 0.96
+
+
+Results:
+Best MSE score: Model 5
+Best R2 score: Model 5
+
+Average MSE with iteration=14: 19356784.305376343
+Average R2 with iteration=14: 0.2584402543333032
+
+Training Decision Tree with iteration=15
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 10865782.68
+R-squared 1 Model: R2 = 0.65
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 6131870.16
+R-squared 2 Model: R2 = 0.50
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 16842315.52
+R-squared 3 Model: R2 = -0.23
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 15867796.66
+R-squared 4 Model: R2 = 0.21
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 35606068.70
+R-squared 5 Model: R2 = 0.34
+
+
+Results:
+Best MSE score: Model 2
+Best R2 score: Model 1
+
+Average MSE with iteration=15: 17062766.743010752
+Average R2 with iteration=15: 0.2936596008378807
+
+Training Decision Tree with iteration=16
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 23319453.78
+R-squared 1 Model: R2 = -0.03
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 1355298.55
+R-squared 2 Model: R2 = 0.94
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 57770232.50
+R-squared 3 Model: R2 = -1.30
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 39013882.99
+R-squared 4 Model: R2 = -1.22
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 38884476.01
+R-squared 5 Model: R2 = 0.13
+
+
+Results:
+Best MSE score: Model 2
+Best R2 score: Model 2
+
+Average MSE with iteration=16: 32068668.76451613
+Average R2 with iteration=16: -0.296161470519448
+
+Training Decision Tree with iteration=17
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 12239215.01
+R-squared 1 Model: R2 = 0.71
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 37421306.10
+R-squared 2 Model: R2 = -1.33
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 24112541.71
+R-squared 3 Model: R2 = -0.42
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 2119524.13
+R-squared 4 Model: R2 = 0.01
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 9860121.59
+R-squared 5 Model: R2 = 0.81
+
+
+Results:
+Best MSE score: Model 4
+Best R2 score: Model 5
+
+Average MSE with iteration=17: 17150541.708602153
+Average R2 with iteration=17: -0.0432673631389463
+
+Training Decision Tree with iteration=18
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 51610567.42
+R-squared 1 Model: R2 = -3.87
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 54000858.55
+R-squared 2 Model: R2 = 0.15
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 11265492.05
+R-squared 3 Model: R2 = 0.35
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 17029103.08
+R-squared 4 Model: R2 = 0.17
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 14482586.08
+R-squared 5 Model: R2 = 0.27
+
+
+Results:
+Best MSE score: Model 3
+Best R2 score: Model 3
+
+Average MSE with iteration=18: 29677721.43763441
+Average R2 with iteration=18: -0.5871349272373859
+
+Training Decision Tree with iteration=19
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 29573716.10
+R-squared 1 Model: R2 = -0.09
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 21398678.66
+R-squared 2 Model: R2 = -0.65
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 56153093.61
+R-squared 3 Model: R2 = -0.01
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 20041970.11
+R-squared 4 Model: R2 = -0.03
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 26780988.06
+R-squared 5 Model: R2 = -0.66
+
+
+Results:
+Best MSE score: Model 4
+Best R2 score: Model 3
+
+Average MSE with iteration=19: 30789689.30967742
+Average R2 with iteration=19: -0.28830225452682806
+
+Training Decision Tree with iteration=20
+Using model with name: DecisionTreeModel
+Fold 1 Model: MSE = 29406674.65
+R-squared 1 Model: R2 = 0.26
+
+Using model with name: DecisionTreeModel
+Fold 2 Model: MSE = 21139072.83
+R-squared 2 Model: R2 = -4.10
+
+Using model with name: DecisionTreeModel
+Fold 3 Model: MSE = 24492961.67
+R-squared 3 Model: R2 = 0.65
+
+Using model with name: DecisionTreeModel
+Fold 4 Model: MSE = 3335223.69
+R-squared 4 Model: R2 = 0.01
+
+Using model with name: DecisionTreeModel
+Fold 5 Model: MSE = 15758693.75
+R-squared 5 Model: R2 = -0.29
+
+
+Results:
+Best MSE score: Model 4
+Best R2 score: Model 3
+
+Average MSE with iteration=20: 18826525.315053765
+Average R2 with iteration=20: -0.6917460416334613
+
+Total retries: 2
