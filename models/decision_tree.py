@@ -89,7 +89,7 @@ def variance_reduction(X, y, feature_index, threshold):
         left_var = variance(left_y)
         right_var = variance(right_y)
 
-    return total_var (len(left_y) / len(y)) * left_var + (len(right_y) / len(y)) * right_var
+    return total_var - (len(left_y) / len(y)) * left_var + (len(right_y) / len(y)) * right_var
 
 # We find the best feature to use based on each features variance
 def find_best_split(X, y):
