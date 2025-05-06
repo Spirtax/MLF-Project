@@ -93,11 +93,11 @@ def kfold_validation(n_folds=5, model_function = None, _seed=42):
     return models, mse_scores, r2_scores
 
 # Runs tests for knn. Will plot points for the average MSE and R2 over 5 models using k-fold validation
-def test_knn(upper_limit=15):
+def test_knn(iterations=15):
     mse_scores_per_k = []
     r2_scores_per_k = []
 
-    for k in range(1, upper_limit+1, 2):
+    for k in range(1, iterations+1):
         print(f"Training with k={k}")
         models, mse_scores, r2_scores = kfold_validation(model_function=lambda: KNNModel(k=k))
 
@@ -110,28 +110,31 @@ def test_knn(upper_limit=15):
         print(f"Average MSE for k={k}: {avg_mse}")
         print(f"Average R2 for k={k}: {r2_avg}\n")
 
-    k_values = list(range(1, upper_limit+1, 2))
+    k_values = list(range(1, iterations+1))
 
     plt.figure(figsize=(12, 6))
 
     # Plot MSE
-    plt.subplot(1, 2, 1)
+    plt.figure(figsize=(6, 4))
     plt.plot(k_values, mse_scores_per_k, marker='o', label='MSE', color='blue')
     plt.xlabel('k value')
     plt.ylabel('MSE')
     plt.title('MSE vs k value')
     plt.grid(True)
+    plt.tight_layout()
+    plt.savefig('data/knn/knn_mse_plot.png')
+    plt.close()
 
-    # Plot R2
-    plt.subplot(1, 2, 2)
+    # Plot R²
+    plt.figure(figsize=(6, 4))
     plt.plot(k_values, r2_scores_per_k, marker='o', label='R²', color='red')
     plt.xlabel('k value')
-    plt.ylabel('R2')
-    plt.title('R2 vs k value')
-
+    plt.ylabel('R²')
+    plt.title('R² vs k value')
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig('data/knn/knn_plot.png') 
+    plt.savefig('data/knn/knn_r2_plot.png')
+    plt.close()
 
 # Runs tests for decision trees. Will plot points for the average MSE and R2 over 5 models using k-fold validation
 def test_decision_tree(iterations=5):
@@ -156,7 +159,7 @@ def test_decision_tree(iterations=5):
             if avg_r2 >= -1:
                 break
             else:
-                retries +=1
+                retries += 1
                 print(f"R2 is too low: (avg_r2 = {avg_r2}), retrying with i = {i}\n")
 
         mse_scores_per_i.append(avg_mse)
@@ -165,31 +168,35 @@ def test_decision_tree(iterations=5):
         print(f"Average MSE with iteration={i}: {avg_mse}")
         print(f"Average R2 with iteration={i}: {avg_r2}\n")
 
-    plt.figure(figsize=(12, 6))
     x_values = list(range(1, iterations + 1))
+
     # Plot MSE
-    plt.subplot(1, 2, 1)
-    plt.plot(x_values, mse_scores_per_i, marker='o', label='MSE', color='blue')
+    plt.figure(figsize=(6, 6))
+    plt.plot(x_values, mse_scores_per_i, marker='o', color='blue')
     plt.xlabel('Iteration')
     plt.ylabel('MSE')
     plt.title('MSE over iterations')
     plt.grid(True)
+    plt.tight_layout()
+    print(f"Total retries: {retries}")
+    plt.savefig('data/decision_tree/decision_tree_plot_mse.png')
 
     # Plot R2
-    plt.subplot(1, 2, 2)
-    plt.plot(x_values, r2_scores_per_i, marker='o', label='R2', color='red')
+    plt.figure(figsize=(6, 6))
+    plt.plot(x_values, r2_scores_per_i, marker='o', color='red')
     plt.xlabel('Iteration')
     plt.ylabel('R2')
     plt.title('R2 over iterations')
-
-    plt.tight_layout()
     plt.grid(True)
-    print(f"Total retries: {retries}")
-    plt.savefig('data/decision_tree/decision_tree_plot_entropy.png')
+    plt.tight_layout()
+    plt.savefig('data/decision_tree/decision_tree_plot_r2.png')
+
 
 # ==============================================
 # ============== Testing the data ==============
 # ==============================================
 
-# test_knn(upper_limit=15)
-test_decision_tree(iterations=20)
+# Note that doing this is gonna overwrite the current plots stored!
+
+test_knn(upper_limit=5)
+test_decision_tree(iterations=5)

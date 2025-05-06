@@ -50,8 +50,14 @@ def entropy(y):
 # This is the old information_gain method that we used with our entropy model
 def information_gain(X, y, feature_index, threshold):
     # Split the data based on the threshold
-    left_y = [y[i] for i in range(len(X)) if X[i][feature_index] <= threshold]
-    right_y = [y[i] for i in range(len(X)) if X[i][feature_index] > threshold]
+    left_y = []
+    right_y = []
+
+    for i in range(len(X)):
+        if X[i][feature_index] <= threshold:
+            left_y.append(y[i])
+        else:
+            right_y.append(y[i])
     
     # Get all entropies. We subtract parent entropy from left and right
     parent_entropy = entropy(y)
@@ -69,12 +75,19 @@ def variance(y):
 
 # This follows the exact same format as information gain, we are just using variance instead
 def variance_reduction(X, y, feature_index, threshold):
-    left_y = [y[i] for i in range(len(X)) if X[i][feature_index] <= threshold]
-    right_y = [y[i] for i in range(len(X)) if X[i][feature_index] > threshold]
+    # Split the data based on the threshold
+    left_y = []
+    right_y = []
 
-    total_var = variance(y)
-    left_var = variance(left_y)
-    right_var = variance(right_y)
+    for i in range(len(X)):
+        if X[i][feature_index] <= threshold:
+            left_y.append(y[i])
+        else:
+            right_y.append(y[i])
+
+        total_var = variance(y)
+        left_var = variance(left_y)
+        right_var = variance(right_y)
 
     return total_var (len(left_y) / len(y)) * left_var + (len(right_y) / len(y)) * right_var
 
@@ -93,7 +106,7 @@ def find_best_split(X, y):
         thresholds = sorted(set(feature_values)) 
         for threshold in thresholds:
             # Calling variance_reduction here instead of information_gain (entropy)
-            score = variance_reduction(X, y, feature, threshold) # You can swap out variance_reduction for information_gain to test the entropy code (It sucks)
+            score = information_gain(X, y, feature, threshold) # You can swap out variance_reduction for information_gain to test the entropy code (It sucks)
             if score > best_score:
                 best_score = score
                 best_feature = feature
@@ -105,25 +118,43 @@ def find_best_split(X, y):
 def build_tree(X, y):
     # the length of y will be 1 if we stop getting new values
     # which means building the the tree more will not improve it
-    if len(set(y)) == 1: return DecisionTreeNode(value=y[0])
+    if len(set(y)) == 1: 
+        return DecisionTreeNode(value=y[0])
 
     # Find the best feature to split on and its threshold value
     feature_index, threshold = find_best_split(X, y)
 
     # If there is no feature then we return a node that is the average of all the remaining features
-    if feature_index is None: return DecisionTreeNode(value=np.mean(y))
+    if feature_index is None: 
+        return DecisionTreeNode(value=np.mean(y))
 
     # Split data based on the best threshold
-    left_indices = [i for i in range(len(X)) if X[i][feature_index] <= threshold]
-    right_indices = [i for i in range(len(X)) if X[i][feature_index] > threshold]
+    left_indices = []
+    right_indices = []
+
+    for i in range(len(X)):
+        if X[i][feature_index] <= threshold:
+            left_indices.append(i)
+        else:
+            right_indices.append(i)
 
     # If one of the sides is empty return the average of the remaining features
-    if not left_indices or not right_indices: return DecisionTreeNode(value=np.mean(y))
+    if not left_indices or not right_indices: 
+        return DecisionTreeNode(value=np.mean(y))
 
-    X_left = [X[i] for i in left_indices]
-    y_left = [y[i] for i in left_indices]
-    X_right = [X[i] for i in right_indices]
-    y_right = [y[i] for i in right_indices]
+    # Construct the tree node and return it. Get the X and y labels for the left and right side, and call build_tree to recursively get those new sides children
+    X_left = []
+    y_left = []
+    X_right = []
+    y_right = []
+
+    for i in left_indices:
+        X_left.append(X[i])
+        y_left.append(y[i])
+
+    for i in right_indices:
+        X_right.append(X[i])
+        y_right.append(y[i])
 
     left_child = build_tree(X_left, y_left)
     right_child = build_tree(X_right, y_right)
@@ -136,6 +167,7 @@ def build_tree(X, y):
     )
 
 # Traverse the tree to make a prediction for a given query
+# This simply just recursively checks using our nodes threshold amount 
 def traverse_tree(node, x):
     if node.value is not None:
         return node.value
