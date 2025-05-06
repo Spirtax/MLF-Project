@@ -210,16 +210,13 @@ predictions = make_pred(x, weights, biases, number_layers)
 print(predictions[:5])  
 
 
-# k cross fold validation
+
 k = 10
 
-
-
 def k_fold_cross_validation(x, y, k, epochs, learning_rate, number_layers, nodes_per_layer, weights, biases):
-    # Split the data into k folds
     fold_size = len(x) // k
     indexes = list(range(len(x)))
-    random.shuffle(indexes)  # Shuffle data before splitting into folds
+    random.shuffle(indexes)  
     
     folds = [indexes[i * fold_size:(i + 1) * fold_size] for i in range(k)]
     
@@ -244,13 +241,12 @@ def k_fold_cross_validation(x, y, k, epochs, learning_rate, number_layers, nodes
         x_test = total_x[i]
         y_test = total_y[i]
 
-        # Get 75% of data to train on (training is all other folds)
+       
         for j in range(k):
             if j != i:
                 x_train.extend(total_x[j])
                 y_train.extend(total_y[j])
 
-        # Train the model
         loss = train(x_train, y_train, epochs, learning_rate, number_layers=number_layers, weights=weights, biases=biases, k_fold_cross=False, normal_nn=False)
         if loss < min_loss:
             min_loss = loss
@@ -280,3 +276,4 @@ plt.title('Training Loss and K-Fold Cross-Validation Loss')
 plt.legend()
 
 plt.show()
+
