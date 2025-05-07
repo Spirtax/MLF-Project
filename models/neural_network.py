@@ -164,6 +164,8 @@ normal_nn_x = []
 normal_nn_loss = []
 k_fold_cross_epochs = []
 k_fold_cross_error = []
+folds_x = [[]]
+folds_error = [[]]
 
 def train(x, y, epochs, learning_rate, number_layers, weights, biases, k_fold_cross, normal_nn):
     total_loss = 0
@@ -277,3 +279,18 @@ plt.legend()
 
 plt.show()
 
+
+'''
+colors = ['blue', 'red', 'green', 'black', 'orange', 'purple']
+plt.figure(figsize=(10, 6))
+for i in range(len(folds_x)-1):
+    plt.plot(folds_x[i], folds_error[i], label=f"Fold {i} Loss", color=colors[i])
+
+
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.title('Training Loss for K-Fold Cross-Validation')
+plt.legend()
+
+plt.show()
+'''
